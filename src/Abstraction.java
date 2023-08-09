@@ -44,7 +44,7 @@ public abstract class Abstraction{
         }
     }
 
-    public void deleteLine(String key) {
+    public void deleteLine(String key) {    //delete the value in the map
         map.remove(key);
     }
 }
