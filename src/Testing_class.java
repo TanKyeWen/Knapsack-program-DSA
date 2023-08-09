@@ -24,4 +24,16 @@ class Product {
     public double getPrice() {
     	return price;
     }
+    
+    public void setName(String name) {
+    	this.name = name;
+    }
+    
+    public void setWeight(double weight) {
+    	this.weight = weight;
+    }
+    
+    public void setPrice(double price) {
+    	this.price = price;
+    }
 }

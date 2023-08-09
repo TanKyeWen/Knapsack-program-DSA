@@ -56,7 +56,60 @@ public class Test_Run {
         }
         
         else if(enter.equals("3")){
+        	System.out.println("Enter name of product: ");
+        	String search = input.next();
         	
+        	boolean productFound = false;
+        	for (Product product : productList) { // Test using arrayList
+                if (product.getName().equalsIgnoreCase(search)) {
+                	boolean loopchk = true;
+                	while (loopchk) {
+	                    System.out.println("Enter 1 to update weight of " + product.getName());
+	                    System.out.println("Enter 2 to update price of " + product.getName());
+	                    enter = input.next();
+	                    double value;
+                    	if(enter.equals("1")) {
+                    		System.out.println("Enter new weight : ");
+                    		value = input.nextDouble();
+                    		product.setWeight(value);
+                    		break;
+                    	}
+                    	else if(enter.equals("2")) {
+                    		System.out.println("Enter new price : ");
+                    		value = input.nextDouble();
+                    		product.setWeight(value);
+                    		break;
+                    	}
+                    	else
+                    		System.out.println("Invalid input entered.");
+                	}
+                    productFound = true;
+                    saveFile(productList);
+                    break;
+                }
+            }
+
+            if (!productFound) {
+                System.out.println("Product not found.");
+            }
+        }
+        
+        else if(enter.equals("4")){
+        	System.out.println("Enter name of product: ");
+        	String search = input.next();
+        	
+        	boolean productFound = false;
+        	for (Product product : productList) { // Test using arrayList
+                if (product.getName().equalsIgnoreCase(search)) {
+                    // remove from the list
+                    productFound = true;
+                    break;
+                }
+            }
+
+            if (!productFound) {
+                System.out.println("Product not found.");
+            }
         }
         input.close();
     }
