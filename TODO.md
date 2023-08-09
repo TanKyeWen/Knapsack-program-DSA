@@ -16,3 +16,6 @@ Note : this is how we are going to implemenet this algorithm
                 main    main
 
 Data structure used : Map
+
+More information refer here : 
+https://www.scaler.com/topics/knapsack-problem/
