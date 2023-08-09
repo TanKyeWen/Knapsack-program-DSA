@@ -1,4 +1,4 @@
-//note : this is how we are going to implemenet this algorithm
+Note : this is how we are going to implemenet this algorithm
 
                  INTERFACE
                      |
