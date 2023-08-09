@@ -1,10 +1,17 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public abstract class Abstraction{
-    private Map<String, TripleValues> map;
+    private Map<String, TripleValues> map;  //private instance for Map
 
-    public Abstraction(){
+    public Abstraction(){                   //constructor for Map
         map = new HashMap<>();
     }
 
@@ -36,18 +43,22 @@ public abstract class Abstraction{
             System.out.println("Key: " + key + ", Value 1: " + values.getValue1() + ", Value 2: " + values.getValue2());
         }
     }
+
+    public void deleteLine(String key) {
+        map.remove(key);
+    }
 }
 
-class TripleValues {
-    private double value1;
-    private double value2;
+class TripleValues {                // triple values class
+    private double value1;          // private instance for value 1
+    private double value2;          // private instance for value 2
 
-    public TripleValues(double value1, double value2) {
+    public TripleValues(double value1, double value2) {             //constructor 
         this.value1 = value1;
         this.value2 = value2;
     }
 
-    public double getValue1() {
+    public double getValue1() {     
         return value1;
     }
 

@@ -2,7 +2,11 @@ public class AbstractionTestOnly{
     public static void main(String[] args){
        ConcreteAbstraction ab = new ConcreteAbstraction();
         ab.put("Key1", 10.5, 20.3);     //inserter
-        ab.put("Key2", 15.2, 30.7);     //inserter
+        ab.put("Key2", 15.2, 30.7); 
+        ab.put("Key3", 16.2, 31.7);
+        ab.put("Key4", 18.2, 32.7);
+        ab.put("Key5", 20.2, 36.7);
+        ab.deleteLine("Key1");    //inserter
         ab.printMapValues();  //print values
     }
 }
