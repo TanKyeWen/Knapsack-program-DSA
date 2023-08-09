@@ -47,6 +47,20 @@ public abstract class Abstraction{
     public void deleteLine(String key) {    //delete the value in the map
         map.remove(key);
     }
+
+    public void updateValues(String key, double newValue1, double newValue2) {      //update the value in the map
+        if (map.containsKey(key)) {
+            TripleValues existingValues = map.get(key);
+            if (existingValues.getValue1() == newValue1 && existingValues.getValue2() == newValue2) {
+                System.out.println("Error: Values are the same. No update performed.");
+            } else {
+                map.put(key, new TripleValues(newValue1, newValue2));
+                System.out.println("Values updated successfully.");
+            }
+        } else {
+            System.out.println("Key not found: " + key);
+        }
+    }
 }
 
 class TripleValues {                // triple values class
