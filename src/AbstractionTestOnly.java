@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class AbstractionTestOnly{
     public static void main(String[] args){
        ConcreteAbstraction ab = new ConcreteAbstraction();
@@ -15,4 +18,12 @@ public class AbstractionTestOnly{
 
 class ConcreteAbstraction extends Abstraction {
     // You can add additional methods or fields specific to this subclass if needed
+    
+    public void put(String key, double value1, double value2) {
+        map.put(key, new TripleValues(value1, value2));
+    }
+
+    public void deleteLine(String key) {    //delete the value in the map
+        map.remove(key);
+    }
 }

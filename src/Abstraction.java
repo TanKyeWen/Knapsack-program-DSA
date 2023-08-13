@@ -8,15 +8,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public abstract class Abstraction{
-    private Map<String, TripleValues> map;  //private instance for Map
+public abstract class Abstraction implements Interface{
+    protected Map<String, TripleValues> map;  //private instance for Map
 
     public Abstraction(){                   //constructor for Map
         map = new HashMap<>();
-    }
-
-    public void put(String key, double value1, double value2) {
-        map.put(key, new TripleValues(value1, value2));
     }
 
     public double getValue1(String key) {
@@ -44,10 +40,6 @@ public abstract class Abstraction{
         }
     }
 
-    public void deleteLine(String key) {    //delete the value in the map
-        map.remove(key);
-    }
-
     public void updateValues(String key, double newValue1, double newValue2) {      //update the value in the map
         if (map.containsKey(key)) {
             TripleValues existingValues = map.get(key);
@@ -61,6 +53,11 @@ public abstract class Abstraction{
             System.out.println("Key not found: " + key);
         }
     }
+
+   public abstract void put(String key, double value1, double value2);
+
+   public abstract void deleteLine(String key);    //delete the value in the map
+
 }
 
 class TripleValues {                // triple values class
