@@ -13,19 +13,21 @@ public class mainApp {
             // Input: Number of items
             System.out.print("Enter the number of items: ");
             int numItems = sc.nextInt();
+            double itemQuantity = 0.0, itemValue = 0.0, itemWeight = 0.0;
+            String itemName = null;
 
             // Input: Item data (name, quantity, weight, value)
             ConcreteAbstraction items = new ConcreteAbstraction();
             for (int i = 0; i < numItems; i++) {
                 System.out.print("Enter item name: ");
-                String itemName = sc.next();
+                itemName = sc.next();
                 System.out.print("Enter item quantity: ");
-                int itemQuantity = sc.nextInt();
+                itemQuantity = sc.nextDouble();
                 System.out.print("Enter item weight: ");
-                int itemWeight = sc.nextInt();
+                itemWeight = sc.nextDouble();
                 System.out.print("Enter item value: ");
-                int itemValue = sc.nextInt();
-                items.put(itemName, itemQuantity, itemWeight, itemValue);
+                itemValue = sc.nextDouble();
+                items.put(itemName, itemValue, itemValue, itemValue);
             }
 
             System.out.println("Knapsack Problem Solver ");
@@ -37,7 +39,16 @@ public class mainApp {
 
             switch(user_algo_selection){
                 case "1":
-                    RecursiveAlgorithm recursive = new RecursiveAlgorithm(itemName, itemQuantity, itemWeight, itemValue, items);
+                RecursiveAlgorithm recursive;
+                String[] itemNames = items.keySet().toArray(new String[0]);
+
+                List<String> selectedItems = recursive.knapsackRecursive();
+
+                // Output the results
+                System.out.println("Selected items:");
+                for (String name : selectedItems) {
+                    System.out.println(name);
+                }
             }
         }
 
@@ -58,4 +69,16 @@ public class mainApp {
                 System.out.println();
             }
         }
+}
+
+class ConcreteAbstraction extends Abstraction {
+    // You can add additional methods or fields specific to this subclass if needed
+    
+    public void put(String key, double value1, double value2,double value3) {
+        map.put(key, new TripleValues(value1, value2,value3));
+    }
+
+    public void deleteLine(String key) {    //delete the value in the map
+        map.remove(key);
+    }
 }
