@@ -1,13 +1,13 @@
 import java.util.*;
 
-public class TestMemoization {
-    public void mainMemoization(int capacity, int numItems, String itemName, int itemWeight, int itemValue, Map<String, Item> items) {
+public class RecursiveAlgorithm {
+    //private ConcreteAbstraction List = new ConcreteAbstraction();
+    public RecursiveAlgorithm(int capacity, int numItems, String itemName, int itemWeight, int itemValue, ConcreteAbstraction items) {
         Scanner scanner = new Scanner(System.in);
-
+        
         String[] itemNames = items.keySet().toArray(new String[0]);
-        Map<String, List<String>> memo = new HashMap<>();
 
-        List<String> selectedItems = knapsackMemoized(items, itemNames, numItems, capacity, memo);
+        List<String> selectedItems = knapsackRecursive(items, itemNames, numItems, capacity);
 
         // Output the results
         System.out.println("Selected items:");
@@ -16,46 +16,29 @@ public class TestMemoization {
         }
     }
 
-    public List<String> knapsackMemoized(
-            Map<String, Item> items,
-            String[] itemNames,
-            int n,
-            int capacity,
-            Map<String, List<String>> memo) {
+    public List<String> knapsackRecursive(Map<String, Item> items, String[] itemNames, int n, int capacity) {
         if (n == 0 || capacity == 0) {
             return new ArrayList<>();
-        }
-
-        String memoKey = n + "-" + capacity;
-        if (memo.containsKey(memoKey)) {
-            return memo.get(memoKey);
         }
 
         Item currentItem = items.get(itemNames[n - 1]);
 
         if (currentItem.getWeight() > capacity) {
-            List<String> result = knapsackMemoized(items, itemNames, n - 1, capacity, memo);
-            memo.put(memoKey, result);
-            return result;
+            return knapsackRecursive(items, itemNames, n - 1, capacity);
         }
 
-        List<String> withoutCurrentItem = knapsackMemoized(items, itemNames, n - 1, capacity, memo);
-        List<String> withCurrentItem = knapsackMemoized(items, itemNames, n - 1, capacity - currentItem.getWeight(), memo);
-        withCurrentItem = new ArrayList<>(withCurrentItem);
+        List<String> withoutCurrentItem = knapsackRecursive(items, itemNames, n - 1, capacity);
+        List<String> withCurrentItem = knapsackRecursive(items, itemNames, n - 1, capacity - currentItem.getWeight());
         withCurrentItem.add(itemNames[n - 1]);
 
         int valueWithout = calculateTotalValue(items, withoutCurrentItem);
         int valueWith = calculateTotalValue(items, withCurrentItem);
 
-        List<String> result;
         if (valueWith > valueWithout) {
-            result = withCurrentItem;
+            return withCurrentItem;
         } else {
-            result = withoutCurrentItem;
+            return withoutCurrentItem;
         }
-
-        memo.put(memoKey, result);
-        return result;
     }
 
     public int calculateTotalValue(Map<String, Item> items, List<String> selectedItems) {
@@ -84,3 +67,4 @@ class Item {
         return value;
     }
 }
+
