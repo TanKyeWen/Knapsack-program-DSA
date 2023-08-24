@@ -2,9 +2,9 @@ import java.util.*;
 
 public class RecursiveAlgorithm {
     //private ConcreteAbstraction List = new ConcreteAbstraction();
-    public RecursiveAlgorithm(int capacity, int numItems, String itemName, int itemWeight, int itemValue, ConcreteAbstraction items) {
+    public RecursiveAlgorithm(String itemName, double capacity, int numItems, double itemWeight, double itemValue, Map<String, Item> items) {
         Scanner scanner = new Scanner(System.in);
-        
+
         String[] itemNames = items.keySet().toArray(new String[0]);
 
         List<String> selectedItems = knapsackRecursive(items, itemNames, numItems, capacity);
@@ -16,12 +16,12 @@ public class RecursiveAlgorithm {
         }
     }
 
-    public List<String> knapsackRecursive(Map<String, Item> items, String[] itemNames, int n, int capacity) {
+    public List<String> knapsackRecursive(Map<String, Item> items, String[] itemNames, int n, double capacity) {
         if (n == 0 || capacity == 0) {
             return new ArrayList<>();
         }
 
-        Item currentItem = items.get(itemNames[n - 1]);
+        Item currentItem = items.get(itemNames[ (n - 1)]);
 
         if (currentItem.getWeight() > capacity) {
             return knapsackRecursive(items, itemNames, n - 1, capacity);

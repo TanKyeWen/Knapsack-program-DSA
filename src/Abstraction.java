@@ -42,6 +42,7 @@ public abstract class Abstraction implements Interface{
         }
     }
 
+
     public void updateValues(String key, double newValue1, double newValue2,double newValue3) {      //update the value in the map
         if (map.containsKey(key)) {
             TripleValues existingValues = map.get(key);
@@ -65,7 +66,7 @@ public abstract class Abstraction implements Interface{
 class TripleValues {                // triple values class
     private double value1;          // private instance for value 1
     private double value2;          // private instance for value 2
-    private double value3;
+    private double value3;          // private instance for value 3
 
     public TripleValues(double value1, double value2,double value3) {             //constructor 
         this.value1 = value1;
