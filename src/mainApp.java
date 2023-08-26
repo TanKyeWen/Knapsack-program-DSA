@@ -37,6 +37,9 @@ public class mainApp {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
+            System.out.println("==================");
+            System.out.println("Knapsack program ");
+            System.out.println("==================");
             System.out.println("Choose an option:");
             System.out.println("1. Add Item");
             System.out.println("2. Update Item");
@@ -44,18 +47,27 @@ public class mainApp {
             System.out.println("4. Search Item");
             System.out.println("5. Print All Items");
             System.out.println("6. Exit");
+            System.out.println("Please enter your choice >>");
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume the newline
 
             switch (choice) {
                 case 1:
-                    System.out.print("Enter Item Name: ");
-                    String itemName = scanner.nextLine();
-                    System.out.print("Enter Item Weight: ");
-                    double itemWeight = scanner.nextDouble();
-                    System.out.print("Enter Item Value: ");
-                    double itemValue = scanner.nextDouble();
-                    manager.addItem(itemName, itemWeight, itemValue);
+                    System.out.print("Please enter how many items you would like to add :");
+                    int num_items = scanner.nextInt();
+                    scanner.nextLine();
+
+                    for(int i=0; i<num_items; i++){
+                        System.out.println("Enter Item Name: ");
+                        String itemName = scanner.nextLine();
+                        System.out.println("Enter Item Weight: ");
+                        double itemWeight = scanner.nextDouble();
+                        System.out.println("Enter Item Value: ");
+                        double itemValue = scanner.nextDouble();
+                        manager.addItem(itemName, itemWeight, itemValue);
+                        scanner.nextLine();
+                    }
+
                     break;
                 case 2:
                     System.out.print("Enter Item Name to Update: ");
