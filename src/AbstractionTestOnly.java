@@ -9,6 +9,7 @@ public class AbstractionTestOnly{
         ab.put("Key3", 16.2, 31.7);
         ab.put("Key4", 18.2, 32.7);
         ab.put("Key5", 20.2, 36.7);
+        ab.put("Key5", 20.3, 37.7);
         ab.updateValues("Key1", 10.5, 20.3);  // Update with same values
         //ab.updateValues("Key1", 12.0, 22.0,20.3);  // Update with different values/
         //ab.deleteLine("Key1");                                                   // Delete 

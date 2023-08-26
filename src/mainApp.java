@@ -1,84 +1,93 @@
 import java.util.*;
 
 public class mainApp {
+    private ConcreteAbstraction itemMap;
+
+    public mainApp(){
+        itemMap = new ConcreteAbstraction();
+    }
+
+    public void addItem(String itemName, double itemWeight, double itemValue) {
+        itemMap.put(itemName, itemWeight, itemValue);
+        System.out.println("Item added successfully.");
+    }
+
+    public void updateItem(String itemName, double newItemWeight, double newItemValue) {
+        itemMap.updateValues(itemName, newItemWeight, newItemValue);
+    }
+
+    public void deleteItem(String itemName) {
+        itemMap.deleteLine(itemName);
+    }
+
+    public void searchItem(String itemName) {
+        double itemWeight = itemMap.getValue1(itemName);
+        double itemValue = itemMap.getValue2(itemName);
+        System.out.println("Item: " + itemName);
+        System.out.println("Weight: " + itemWeight);
+        System.out.println("Value: " + itemValue);
+    }
+
+    public void printAllItems() {
+        itemMap.printMapValues();
+    }
+
     public static void main(String[] args){
-        boolean user_loop = true;
-        while(user_loop){
-            Scanner sc = new Scanner(System.in);
-            
-            // Input: Capacity of the knapsack
-            System.out.print("Enter the knapsack capacity: ");
-            int capacity = sc.nextInt();
+        mainApp manager = new mainApp();
+        Scanner scanner = new Scanner(System.in);
 
-            // Input: Number of items
-            System.out.print("Enter the number of items: ");
-            int numItems = sc.nextInt();
-            double itemQuantity = 0.0, itemValue = 0.0, itemWeight = 0.0;
-            String itemName = null;
+        while (true) {
+            System.out.println("Choose an option:");
+            System.out.println("1. Add Item");
+            System.out.println("2. Update Item");
+            System.out.println("3. Delete Item");
+            System.out.println("4. Search Item");
+            System.out.println("5. Print All Items");
+            System.out.println("6. Exit");
+            int choice = scanner.nextInt();
+            scanner.nextLine();  // Consume the newline
 
-            // Input: Item data (name, quantity, weight, value)
-            ConcreteAbstraction items = new ConcreteAbstraction();
-            for (int i = 0; i < numItems; i++) {
-                System.out.print("Enter item name: ");
-                itemName = sc.next();
-                System.out.print("Enter item quantity: ");
-                itemQuantity = sc.nextDouble();
-                System.out.print("Enter item weight: ");
-                itemWeight = sc.nextDouble();
-                System.out.print("Enter item value: ");
-                itemValue = sc.nextDouble();
-                items.put(itemName, itemValue, itemValue, itemValue);
-            }
-
-            System.out.println("Knapsack Problem Solver ");
-            System.out.println("Current available knapsack algorithm " );
-            System.out.println(" 1. Recursive");
-            System.out.println(" 2. Memoization algorithm " );
-            System.out.println("Please select which algorithm you want to use to solve the knapsack problem : ");
-            String user_algo_selection  = sc.nextLine(); 
-
-            switch(user_algo_selection){
-                case "1":
-                RecursiveAlgorithm recursive;
-                String[] itemNames = items.keySet().toArray(new String[0]);
-
-                List<String> selectedItems = recursive.knapsackRecursive();
-
-                // Output the results
-                System.out.println("Selected items:");
-                for (String name : selectedItems) {
-                    System.out.println(name);
-                }
-            }
-        }
-
-        
-        
-        
-
-
-
-
-
-
-
-    }
-
-    public static void clearScreen(){
-            for(int i = 0; i < 20; i++){
-                System.out.println();
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter Item Name: ");
+                    String itemName = scanner.nextLine();
+                    System.out.print("Enter Item Weight: ");
+                    double itemWeight = scanner.nextDouble();
+                    System.out.print("Enter Item Value: ");
+                    double itemValue = scanner.nextDouble();
+                    manager.addItem(itemName, itemWeight, itemValue);
+                    break;
+                case 2:
+                    System.out.print("Enter Item Name to Update: ");
+                    String updateItemName = scanner.nextLine();
+                    System.out.print("Enter New Item Weight: ");
+                    double newItemWeight = scanner.nextDouble();
+                    System.out.print("Enter New Item Value: ");
+                    double newItemValue = scanner.nextDouble();
+                    manager.updateItem(updateItemName, newItemWeight, newItemValue);
+                    break;
+                case 3:
+                    System.out.print("Enter Item Name to Delete: ");
+                    String deleteItemName = scanner.nextLine();
+                    manager.deleteItem(deleteItemName);
+                    break;
+                case 4:
+                    System.out.print("Enter Item Name to Search: ");
+                    String searchItemName = scanner.nextLine();
+                    manager.searchItem(searchItemName);
+                    break;
+                case 5:
+                    manager.printAllItems();
+                    break;
+                case 6:
+                    System.out.println("Exiting...");
+                    scanner.close();
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please choose a valid option.");
             }
         }
-}
-
-class ConcreteAbstraction extends Abstraction {
-    // You can add additional methods or fields specific to this subclass if needed
     
-    public void put(String key, double value1, double value2,double value3) {
-        map.put(key, new TripleValues(value1, value2,value3));
-    }
-
-    public void deleteLine(String key) {    //delete the value in the map
-        map.remove(key);
     }
 }
