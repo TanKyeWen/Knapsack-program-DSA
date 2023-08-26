@@ -8,15 +8,6 @@ abstract class Abstraction{
         items = new HashMap<>();
     }
 
-    public String updateValue(double itemWeight, double itemValue) {
-        if (itemWeight <= 0 || itemValue < 0) {
-            return "Invalid input: weight must be positive, value must be non-negative";
-        }
-
-        items.put(itemWeight, itemValue);
-        return "Item updated successfully";
-    }
-
     public String deleteItem(double itemWeight, double itemValue) {
         if (!items.containsKey(itemWeight) && !items.containsValue(itemValue)) {
             return "Item not found";
