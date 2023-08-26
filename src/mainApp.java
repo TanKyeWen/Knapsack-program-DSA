@@ -1,39 +1,13 @@
 import java.util.*;
 
 public class mainApp {
-    private ConcreteAbstraction itemMap;
-
-    public mainApp(){
-        itemMap = new ConcreteAbstraction();
-    }
-
-    public void addItem(String itemName, double itemWeight, double itemValue) {
-        itemMap.put(itemName, itemWeight, itemValue);
-        System.out.println("Item added successfully.");
-    }
-
-    public void updateItem(String itemName, double newItemWeight, double newItemValue) {
-        itemMap.updateValues(itemName, newItemWeight, newItemValue);
-    }
-
-    public void deleteItem(String itemName) {
-        itemMap.deleteLine(itemName);
-    }
-
-    public void searchItem(String itemName) {
-        double itemWeight = itemMap.getValue1(itemName);
-        double itemValue = itemMap.getValue2(itemName);
-        System.out.println("Item: " + itemName);
-        System.out.println("Weight: " + itemWeight);
-        System.out.println("Value: " + itemValue);
-    }
-
-    public void printAllItems() {
-        itemMap.printMapValues();
+    public static void clearScreen() { //clear screen
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     public static void main(String[] args){
-        mainApp manager = new mainApp();
+        Abstraction knapsack = new Abstraction() {};
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -53,43 +27,48 @@ public class mainApp {
 
             switch (choice) {
                 case 1:
+                clearScreen();
                     System.out.print("Please enter how many items you would like to add :");
                     int num_items = scanner.nextInt();
                     scanner.nextLine();
 
                     for(int i=0; i<num_items; i++){
-                        System.out.println("Enter Item Name: ");
-                        String itemName = scanner.nextLine();
                         System.out.println("Enter Item Weight: ");
                         double itemWeight = scanner.nextDouble();
                         System.out.println("Enter Item Value: ");
                         double itemValue = scanner.nextDouble();
-                        manager.addItem(itemName, itemWeight, itemValue);
+                        knapsack.addToMap(itemWeight, itemValue);
                         scanner.nextLine();
                     }
 
                     break;
                 case 2:
-                    System.out.print("Enter Item Name to Update: ");
-                    String updateItemName = scanner.nextLine();
+                    clearScreen();
                     System.out.print("Enter New Item Weight: ");
                     double newItemWeight = scanner.nextDouble();
                     System.out.print("Enter New Item Value: ");
                     double newItemValue = scanner.nextDouble();
-                    manager.updateItem(updateItemName, newItemWeight, newItemValue);
+                    knapsack.updateValue(newItemWeight,newItemValue);
                     break;
                 case 3:
-                    System.out.print("Enter Item Name to Delete: ");
-                    String deleteItemName = scanner.nextLine();
-                    manager.deleteItem(deleteItemName);
+                    clearScreen();
+                    System.out.print("Enter Item Weight you wanted to delete: ");
+                    double deleteItemWeight = scanner.nextDouble();
+                    System.out.print("Enter Item Value you wanted to delete : ");
+                    double deleteItemValue = scanner.nextDouble();
+                    knapsack.deleteItem(deleteItemWeight, deleteItemValue);
                     break;
                 case 4:
-                    System.out.print("Enter Item Name to Search: ");
-                    String searchItemName = scanner.nextLine();
-                    manager.searchItem(searchItemName);
+                clearScreen();
+                    System.out.print("Enter Item Weight you wanted to delete: ");
+                    double searchItemWeight = scanner.nextDouble();
+                    System.out.print("Enter Item Value you wanted to delete : ");
+                    double searchItemValue = scanner.nextDouble();
+                    knapsack.searchItem(searchItemWeight, searchItemValue);
                     break;
                 case 5:
-                    manager.printAllItems();
+                    clearScreen();
+                    knapsack.printItems();
                     break;
                 case 6:
                     System.out.println("Exiting...");
