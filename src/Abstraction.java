@@ -45,4 +45,8 @@ abstract class Abstraction{
             System.out.println("Weight: " + entry.getKey() + ", Value: " + entry.getValue());
         }
     }
+
+    public int mapSize() {
+        return items.size();
+    }
 }

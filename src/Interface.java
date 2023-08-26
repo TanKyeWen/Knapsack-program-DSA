@@ -7,4 +7,6 @@ public interface Interface {
     public void addToMap(double itemWeight,double itemValue);
 
     public void printItems();
+
+    public int mapSize();
 }

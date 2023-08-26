@@ -6,6 +6,11 @@ public class mainApp {
         System.out.flush();
     }
 
+    public static int maxRecursion(int a, int b) {
+        return  (a >b) ? a : b;
+    }
+
+    
     public static void main(String[] args){
         Abstraction knapsack = new Abstraction() {};
         Scanner scanner = new Scanner(System.in);
@@ -20,6 +25,7 @@ public class mainApp {
             System.out.println("3. Search Item");
             System.out.println("4. Print All Items");
             System.out.println("5. Exit");
+            System.out.println("6. Enter knapsack program and choose which algorithm to use:");
             System.out.println("Please enter your choice >>");
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume the newline
@@ -65,6 +71,13 @@ public class mainApp {
                     System.out.println("Exiting...");
                     scanner.close();
                     System.exit(0);
+                    break;
+                case 6:
+                    clearScreen();
+                    System.out.print("Enter Knapsack capacity :");
+                    int capacity = scanner.nextInt();
+                    int quantityInMap = knapsack.mapSize();
+                    System.out.print("size : " + quantityInMap );
                     break;
                 default:
                     System.out.println("Invalid choice. Please choose a valid option.");
