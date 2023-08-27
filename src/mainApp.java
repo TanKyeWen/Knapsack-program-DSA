@@ -14,9 +14,7 @@ public class mainApp {
     public static void main(String[] args){
         Abstraction knapsack = new Abstraction() {};
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Double> itemWeights = new ArrayList<>();
-        ArrayList<Double> itemValues = new ArrayList<>();
-
+        
         while (true) {
             System.out.println("==================");
             System.out.println("Knapsack program ");
@@ -79,18 +77,13 @@ public class mainApp {
                     System.out.print("Enter Knapsack capacity :");
                     int capacity = scanner.nextInt();
                     int quantityInMap = knapsack.mapSize();
+                    ArrayList<Double> itemWeights = new ArrayList<>(knapsack.items.keySet());
+                    ArrayList<Double> itemValues = new ArrayList<>(knapsack.items.values());
 
-                    double[] weightsArray = new double[itemWeights.size()];
-                    double[] valuesArray = new double[itemValues.size()];
-
-                    for (int i = 0; i < itemWeights.size(); i++) {
-                        weightsArray[i] = itemWeights.get(i);
-                        valuesArray[i] = itemValues.get(i);
-                    }
-
-                    System.out.print("size : " + quantityInMap );
-                    System.out.print("arrayweight: " + weightsArray );
-                    System.out.print("arrayvalue : " + valuesArray );
+                    System.out.println("size: " + quantityInMap);
+                    System.out.println("itemWeights: " + itemWeights);
+                    System.out.println("itemValues: " + itemValues);
+                    
                     break;
                 default:
                     System.out.println("Invalid choice. Please choose a valid option.");
