@@ -74,6 +74,7 @@ public class mainApp {
                         System.out.println("Please choose the algorithm");
                         System.out.println(" 1. Recursive algorithm");
                         System.out.println(" 2. Memoization technique ");
+                        System.out.println(" 3. Brute-Force algorithm ");
                         System.out.println(" Selection " );
                         int user_algo_ch = sc.nextInt();
                         switch(user_algo_ch){
@@ -121,8 +122,32 @@ public class mainApp {
                                 double result2 = mz.memo(capacity2, weightsArray2, valuesArray2, quantityInMap2);
                                 long endTime2 = System.currentTimeMillis();
                                 long executionTime2 = endTime2 - startTime2;
-                                System.out.println("Result of Recursive algorithm:  "  + result2); 
+                                System.out.println("Result of Memoization algorithm:  "  + result2); 
                                 System.out.println("Execution time: " + executionTime2+ " ms"); 
+                                break;
+
+                            case 3:
+                                System.out.print("Enter Knapsack capacity :");
+                                double capacitybt = scanner.nextInt();
+                                int quantityInMapbt = knapsack.mapSize();                                     // quantity of the items in the map
+                                ArrayList<Double> itemWeightsbt = new ArrayList<>(knapsack.items.keySet());   // convert hashmap values into arraylist
+                                ArrayList<Double> itemValuesbt = new ArrayList<>(knapsack.items.values());    // convert hashmap values into arraylist
+                                BruteForceAlgorithm bt = new BruteForceAlgorithm();
+                    
+                                double[] weightsArraybt = new double[itemWeightsbt.size()];                     //convert to array
+                                double[] valuesArraybt= new double[itemValuesbt.size()];                       //convert to array
+    
+                                for (int i = 0; i < itemWeightsbt.size(); i++) {
+                                    weightsArraybt[i] = itemWeightsbt.get(i);
+                                    valuesArraybt[i] = itemValuesbt.get(i);
+                                }
+                                
+                                long startTimebt = System.currentTimeMillis();
+                                double resultbt= bt.BruteForce(capacitybt, weightsArraybt, valuesArraybt, quantityInMapbt);
+                                long endTimebt = System.currentTimeMillis();
+                                long executionTimebt = endTimebt - startTimebt;
+                                System.out.println("Result of Brute Force algorithm:  "  + resultbt); 
+                                System.out.println("Execution time: " + executionTimebt+ " ms"); 
                                 break;
 
                             default:
