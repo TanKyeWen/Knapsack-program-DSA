@@ -27,7 +27,7 @@ public class mainApp {
 
             switch (choice) {
                 case 1:
-                clearScreen();
+                    clearScreen();
                     System.out.print("Please enter how many items you would like to add :");
                     int num_items = scanner.nextInt();
                     scanner.nextLine();
@@ -69,28 +69,67 @@ public class mainApp {
                     break;
                 case 6:
                     clearScreen();
-                    System.out.print("Enter Knapsack capacity :");
-                    double capacity = scanner.nextInt();
-                    int quantityInMap = knapsack.mapSize();                                     // quantity of the items in the map
-                    ArrayList<Double> itemWeights = new ArrayList<>(knapsack.items.keySet());   // convert hashmap values into arraylist
-                    ArrayList<Double> itemValues = new ArrayList<>(knapsack.items.values());    // convert hashmap values into arraylist
-                    RecursiveAlgorithm Recursivealgorithm = new RecursiveAlgorithm();
+                    while(true){
+                        Scanner sc = new Scanner(System.in);
+                        System.out.println("Please choose the algorithm");
+                        System.out.println(" 1. Recursive algorithm");
+                        System.out.println(" 2. Memoization technique ");
+                        System.out.println(" Selection " );
+                        int user_algo_ch = sc.nextInt();
+                        switch(user_algo_ch){
+                            case 1:
+                                System.out.print("Enter Knapsack capacity :");
+                                double capacity = scanner.nextInt();
+                                int quantityInMap = knapsack.mapSize();                                     // quantity of the items in the map
+                                ArrayList<Double> itemWeights = new ArrayList<>(knapsack.items.keySet());   // convert hashmap values into arraylist
+                                ArrayList<Double> itemValues = new ArrayList<>(knapsack.items.values());    // convert hashmap values into arraylist
+                                RecursiveAlgorithm Recursivealgorithm = new RecursiveAlgorithm();
                     
-                    double[] weightsArray = new double[itemWeights.size()];                     //convert to array
-                    double[] valuesArray = new double[itemValues.size()];                       //convert to array
+                                double[] weightsArray = new double[itemWeights.size()];                     //convert to array
+                                double[] valuesArray = new double[itemValues.size()];                       //convert to array
     
-                    for (int i = 0; i < itemWeights.size(); i++) {
-                        weightsArray[i] = itemWeights.get(i);
-                        valuesArray[i] = itemValues.get(i);
-                    }
+                                for (int i = 0; i < itemWeights.size(); i++) {
+                                    weightsArray[i] = itemWeights.get(i);
+                                    valuesArray[i] = itemValues.get(i);
+                                }
 
-                    long startTime = System.currentTimeMillis();
-                    double result = Recursivealgorithm.RecursiveknapSack(capacity, weightsArray, valuesArray, quantityInMap);
-                    long endTime = System.currentTimeMillis();
-                    long executionTime = endTime - startTime;
-                    System.out.println("Result :  "  + result); 
-                    System.out.println("Execution time: " + executionTime + " ms"); 
-                    break;
+                                long startTime = System.currentTimeMillis();
+                                double result = Recursivealgorithm.RecursiveknapSack(capacity, weightsArray, valuesArray, quantityInMap);
+                                long endTime = System.currentTimeMillis();
+                                long executionTime = endTime - startTime;
+                                System.out.println("Result of Recursive algorithm:  "  + result); 
+                                System.out.println("Execution time: " + executionTime + " ms"); 
+                                break;
+                                
+                            case 2:
+                                System.out.print("Enter Knapsack capacity :");
+                                double capacity2 = scanner.nextInt();
+                                int quantityInMap2 = knapsack.mapSize();                                     // quantity of the items in the map
+                                ArrayList<Double> itemWeights2 = new ArrayList<>(knapsack.items.keySet());   // convert hashmap values into arraylist
+                                ArrayList<Double> itemValues2 = new ArrayList<>(knapsack.items.values());    // convert hashmap values into arraylist
+                                Memoization mz = new Memoization();
+                    
+                                double[] weightsArray2 = new double[itemWeights2.size()];                     //convert to array
+                                double[] valuesArray2= new double[itemValues2.size()];                       //convert to array
+    
+                                for (int i = 0; i < itemWeights2.size(); i++) {
+                                    weightsArray2[i] = itemWeights2.get(i);
+                                    valuesArray2[i] = itemValues2.get(i);
+                                }
+                                
+                                long startTime2 = System.currentTimeMillis();
+                                double result2 = mz.memo(capacity2, weightsArray2, valuesArray2, quantityInMap2);
+                                long endTime2 = System.currentTimeMillis();
+                                long executionTime2 = endTime2 - startTime2;
+                                System.out.println("Result of Recursive algorithm:  "  + result2); 
+                                System.out.println("Execution time: " + executionTime2+ " ms"); 
+                                break;
+
+                            default:
+                                clearScreen();
+                                System.out.println("Wrong Input : Try Again ! ");
+                        }
+                    }
                 default:
                     System.out.println("Invalid choice. Please choose a valid option.");
             }
