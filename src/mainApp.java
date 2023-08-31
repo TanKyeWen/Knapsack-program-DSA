@@ -33,30 +33,38 @@ public class mainApp {
                     scanner.nextLine();
 
                     for(int i=0; i<num_items; i++){
+                        System.out.println("Enter Item Name: ");
+                        String itemname = scanner.nextLine();
                         System.out.println("Enter Item Weight: ");
                         double itemWeight = scanner.nextDouble();
                         System.out.println("Enter Item Value: ");
                         double itemValue = scanner.nextDouble();
-                        knapsack.addToMap(itemWeight, itemValue);
+                        System.out.println("");
+                        System.out.println("");
+                        knapsack.addToMap(itemname,itemWeight, itemValue);
                         scanner.nextLine();
                     }
 
                     break;
                 case 2:
                     clearScreen();
+                    System.out.print("Enter Item Name you wanted to delete: ");
+                    String deleteItemName = scanner.nextLine();
                     System.out.print("Enter Item Weight you wanted to delete: ");
                     double deleteItemWeight = scanner.nextDouble();
                     System.out.print("Enter Item Value you wanted to delete : ");
                     double deleteItemValue = scanner.nextDouble();
-                    knapsack.deleteItem(deleteItemWeight, deleteItemValue);
+                    knapsack.deleteItem(deleteItemName,deleteItemWeight, deleteItemValue);
                     break;
                 case 3:
                     clearScreen();
-                    System.out.print("Enter Item Weight you wanted to delete: ");
+                    System.out.print("Enter Item Name you wanted to delete: ");
+                    String searchItemName = scanner.nextLine();
+                    System.out.print("Enter Item Weight you wanted to search: ");
                     double searchItemWeight = scanner.nextDouble();
-                    System.out.print("Enter Item Value you wanted to delete : ");
+                    System.out.print("Enter Item Value you wanted to search : ");
                     double searchItemValue = scanner.nextDouble();
-                    knapsack.searchItem(searchItemWeight, searchItemValue);
+                    knapsack.searchItem(searchItemName,searchItemWeight, searchItemValue);
                     break;
                 case 4:
                     clearScreen();
