@@ -22,6 +22,49 @@ public class RecursiveAlgorithm {
             return max(val[n - 1] + RecursiveknapSack(W - wt[n - 1], wt, val, n - 1),
                        RecursiveknapSack(W, wt, val, n - 1));
     }
- 
+    
+    // Function to return selected item names
+    public String getSelectedItems(double W, double wt[], double val[], int n, String[] itemName) {
+        // Base Case
+        if (n == 0 || W == 0)
+            return "";
+
+        // If weight of the nth item is
+        // more than Knapsack capacity W,
+        // then this item cannot be included
+        // in the optimal solution
+        if (wt[n - 1] > W)
+            return getSelectedItems(W, wt, val, n - 1, itemName);
+
+        // Check if including the current item leads to higher value
+        if (val[n - 1] + RecursiveknapSack(W - wt[n - 1], wt, val, n - 1) >
+            RecursiveknapSack(W, wt, val, n - 1)) {
+            return itemName[n - 1] + " " + getSelectedItems(W - wt[n - 1], wt, val, n - 1, itemName);
+        } else {
+            return getSelectedItems(W, wt, val, n - 1, itemName);
+        }
+    }
+    
+    // Function to return selected item weights
+    public String getSelectedWeights(double W, double wt[], double val[], int n) {
+        // Base Case
+        if (n == 0 || W == 0)
+            return "";
+
+        // If weight of the nth item is
+        // more than Knapsack capacity W,
+        // then this item cannot be included
+        // in the optimal solution
+        if (wt[n - 1] > W)
+            return getSelectedWeights(W, wt, val, n - 1);
+
+        // Check if including the current item leads to higher value
+        if (val[n - 1] + RecursiveknapSack(W - wt[n - 1], wt, val, n - 1) >
+            RecursiveknapSack(W, wt, val, n - 1)) {
+            return wt[n - 1] + " " + getSelectedWeights(W - wt[n - 1], wt, val, n - 1);
+        } else {
+            return getSelectedWeights(W, wt, val, n - 1);
+        }
+    }
 }
 

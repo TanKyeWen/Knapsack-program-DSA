@@ -58,7 +58,7 @@ public class mainApp {
                     break;
                 case 3:
                     clearScreen();
-                    System.out.print("Enter Item Name you wanted to delete: ");
+                    System.out.print("Enter Item Name you wanted to search: ");
                     String searchItemName = scanner.nextLine();
                     System.out.print("Enter Item Weight you wanted to search: ");
                     double searchItemWeight = scanner.nextDouble();
@@ -77,13 +77,19 @@ public class mainApp {
                     break;
                 case 6:
                     clearScreen();
+                    int mapsize = knapsack.mapSize();
+
+                    if(mapsize == 0){
+                        System.out.println("Map is empty > Try Again !");
+                        break;
+                    }
                     while(true){
                         Scanner sc = new Scanner(System.in);
                         System.out.println("Please choose the algorithm");
                         System.out.println(" 1. Recursive algorithm");
                         System.out.println(" 2. Memoization technique ");
                         System.out.println(" 3. Brute-Force algorithm ");
-                        System.out.println(" Selection " );
+                        System.out.println(" Selection  >>" );
                         int user_algo_ch = sc.nextInt();
                         switch(user_algo_ch){
                             case 1:
@@ -115,11 +121,16 @@ public class mainApp {
                                     valuesArray[i] = itemValues.get(i);
                                 }
 
-                                long startTime = System.currentTimeMillis();
+                                long startTime = System.nanoTime();
                                 double result = Recursivealgorithm.RecursiveknapSack(capacity, weightsArray, valuesArray, quantityInMap);
-                                long endTime = System.currentTimeMillis();
+                                long endTime = System.nanoTime();
                                 long executionTime = endTime - startTime;
-                                System.out.println("Result of Recursive algorithm: | Max value "  + result); 
+                                System.out.println("---------------------------------------------------------------"); 
+                                System.out.println("                  Recursive Algorithm                          ");
+                                System.out.println("---------------------------------------------------------------"); 
+                                System.out.println("Max value selected  chosen by Recursive algorithm : "  + result); 
+                                System.out.println("Result selected item name   :                       "  + Recursivealgorithm.getSelectedItems(capacity, weightsArray, valuesArray, quantityInMap,namesArray)); 
+                                System.out.println("Result selected item weight :                       "  + Recursivealgorithm.getSelectedWeights(capacity, weightsArray, valuesArray, quantityInMap));
                                 System.out.println("Execution time: " + executionTime + " ms"); 
                                 break;
                                 
@@ -141,19 +152,26 @@ public class mainApp {
                                         itemValues2.add(entry.getValue());
                                     }
                                 }
+                                String[] namesArray2 = new String[itemNames2.size()];
                                 double[] weightsArray2 = new double[itemWeights2.size()];                     //convert to array
                                 double[] valuesArray2= new double[itemValues2.size()];                       //convert to array
     
                                 for (int i = 0; i < itemWeights2.size(); i++) {
+                                    namesArray2[i] = itemNames2.get(i);
                                     weightsArray2[i] = itemWeights2.get(i);
                                     valuesArray2[i] = itemValues2.get(i);
                                 }
                                 
-                                long startTime2 = System.currentTimeMillis();
+                                long startTime2 = System.nanoTime();
                                 double result2 = mz.memo(capacity2, weightsArray2, valuesArray2, quantityInMap2);
-                                long endTime2 = System.currentTimeMillis();
+                                long endTime2 = System.nanoTime();
                                 long executionTime2 = endTime2 - startTime2;
-                                System.out.println("Result of Memoization algorithm | Max value :  "  + result2); 
+                                System.out.println("---------------------------------------------------------------"); 
+                                System.out.println("                  Memoization Technique                          ");
+                                System.out.println("---------------------------------------------------------------"); 
+                                System.out.println("Max value selected  chosen by Memoization algorithm : "  + result2); 
+                                System.out.println("Result selected item name                           : "  + mz.getSelectedItems(capacity2, weightsArray2, valuesArray2, quantityInMap2,namesArray2)); 
+                                System.out.println("Result selected item weight                         : "  + mz.getSelectedWeights(capacity2, weightsArray2, valuesArray2, quantityInMap2)); 
                                 System.out.println("Execution time: " + executionTime2+ " ms"); 
                                 break;
 
@@ -175,20 +193,27 @@ public class mainApp {
                                         itemValuesbt.add(entry.getValue());
                                     }
                                 }
+                                String[] namesArraybt = new String[itemNamesbt.size()];
                                 double[] weightsArraybt = new double[itemWeightsbt.size()];                     //convert to array
                                 double[] valuesArraybt= new double[itemValuesbt.size()];                       //convert to array
     
                                 for (int i = 0; i < itemWeightsbt.size(); i++) {
+                                    namesArraybt[i] = itemNamesbt.get(i);
                                     weightsArraybt[i] = itemWeightsbt.get(i);
                                     valuesArraybt[i] = itemValuesbt.get(i);
                                 }
                                 
-                                long startTimebt = System.currentTimeMillis();
+                                long startTimebt = System.nanoTime();
                                 double resultbt= bt.BruteForce(capacitybt, weightsArraybt, valuesArraybt, quantityInMapbt);
-                                long endTimebt = System.currentTimeMillis();
+                                long endTimebt = System.nanoTime();
                                 long executionTimebt = endTimebt - startTimebt;
-                                System.out.println("Result of Brute Force algorithm| Max value : "  + resultbt); 
-                                System.out.println("Execution time: " + executionTimebt+ " ms"); 
+                                System.out.println("---------------------------------------------------------------"); 
+                                System.out.println("                  Brute - Force Algorithm                      ");
+                                System.out.println("---------------------------------------------------------------"); 
+                                System.out.println("Max value selected  chosen by Memoization algorithm : "  + resultbt); 
+                                System.out.println("Result selected item name                           : "  + bt.getSelectedItems(capacitybt, weightsArraybt, valuesArraybt, quantityInMapbt,namesArraybt)); 
+                                System.out.println("Result selected item weight                         : "  + bt.getSelectedWeights(capacitybt, weightsArraybt, valuesArraybt, quantityInMapbt)); 
+                                System.out.println("Execution time: " + executionTimebt+ " ms");  
                                 break;
 
                             default:
