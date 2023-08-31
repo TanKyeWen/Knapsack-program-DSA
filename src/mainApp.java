@@ -105,11 +105,12 @@ public class mainApp {
                                     }
                                 }
                                  
-
+                                String[] namesArray = new String[itemNames.size()];
                                 double[] weightsArray = new double[itemWeights.size()];                     //convert to array
                                 double[] valuesArray = new double[itemValues.size()];                       //convert to array
     
                                 for (int i = 0; i < itemWeights.size(); i++) {
+                                    namesArray[i] = itemNames.get(i);
                                     weightsArray[i] = itemWeights.get(i);
                                     valuesArray[i] = itemValues.get(i);
                                 }
@@ -118,7 +119,7 @@ public class mainApp {
                                 double result = Recursivealgorithm.RecursiveknapSack(capacity, weightsArray, valuesArray, quantityInMap);
                                 long endTime = System.currentTimeMillis();
                                 long executionTime = endTime - startTime;
-                                System.out.println("Result of Recursive algorithm:  "  + result); 
+                                System.out.println("Result of Recursive algorithm: | Max value "  + result); 
                                 System.out.println("Execution time: " + executionTime + " ms"); 
                                 break;
                                 
@@ -152,7 +153,7 @@ public class mainApp {
                                 double result2 = mz.memo(capacity2, weightsArray2, valuesArray2, quantityInMap2);
                                 long endTime2 = System.currentTimeMillis();
                                 long executionTime2 = endTime2 - startTime2;
-                                System.out.println("Result of Memoization algorithm:  "  + result2); 
+                                System.out.println("Result of Memoization algorithm | Max value :  "  + result2); 
                                 System.out.println("Execution time: " + executionTime2+ " ms"); 
                                 break;
 
@@ -186,7 +187,7 @@ public class mainApp {
                                 double resultbt= bt.BruteForce(capacitybt, weightsArraybt, valuesArraybt, quantityInMapbt);
                                 long endTimebt = System.currentTimeMillis();
                                 long executionTimebt = endTimebt - startTimebt;
-                                System.out.println("Result of Brute Force algorithm:  "  + resultbt); 
+                                System.out.println("Result of Brute Force algorithm| Max value : "  + resultbt); 
                                 System.out.println("Execution time: " + executionTimebt+ " ms"); 
                                 break;
 
