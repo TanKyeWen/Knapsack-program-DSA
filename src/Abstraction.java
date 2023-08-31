@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 abstract class Abstraction{
-    protected Map<String, Map<Double, Double>> items;
+    protected Map<String, Map<Double, Double>> items; 
 
     public Abstraction() {
         items = new HashMap<>();

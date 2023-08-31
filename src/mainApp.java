@@ -89,11 +89,23 @@ public class mainApp {
                             case 1:
                                 System.out.print("Enter Knapsack capacity :");
                                 double capacity = scanner.nextInt();
-                                int quantityInMap = knapsack.mapSize();                                     // quantity of the items in the map
-                                ArrayList<Double> itemWeights = new ArrayList<>(knapsack.items.keySet());   // convert hashmap values into arraylist
-                                ArrayList<Double> itemValues = new ArrayList<>(knapsack.items.values());    // convert hashmap values into arraylist
+                                int quantityInMap = knapsack.mapSize();  
+                                ArrayList<String> itemNames  =  new ArrayList<>();                                // quantity of the items in the map
+                                ArrayList<Double> itemWeights = new ArrayList<>();   // convert hashmap values into arraylist
+                                ArrayList<Double> itemValues = new ArrayList<>();    // convert hashmap values into arraylist
                                 RecursiveAlgorithm Recursivealgorithm = new RecursiveAlgorithm();
-                    
+
+                                for (Map.Entry<String, Map<Double, Double>> itemEntry : knapsack.items.entrySet()) {
+                                    String itemNamestring = itemEntry.getKey();
+                                    Map<Double, Double> itemDetails = itemEntry.getValue();
+                                    for (Map.Entry<Double, Double> entry : itemDetails.entrySet()) {
+                                        itemNames.add(itemNamestring);
+                                        itemWeights.add(entry.getKey());
+                                        itemValues.add(entry.getValue());
+                                    }
+                                }
+                                 
+
                                 double[] weightsArray = new double[itemWeights.size()];                     //convert to array
                                 double[] valuesArray = new double[itemValues.size()];                       //convert to array
     
@@ -113,11 +125,21 @@ public class mainApp {
                             case 2:
                                 System.out.print("Enter Knapsack capacity :");
                                 double capacity2 = scanner.nextInt();
-                                int quantityInMap2 = knapsack.mapSize();                                     // quantity of the items in the map
-                                ArrayList<Double> itemWeights2 = new ArrayList<>(knapsack.items.keySet());   // convert hashmap values into arraylist
-                                ArrayList<Double> itemValues2 = new ArrayList<>(knapsack.items.values());    // convert hashmap values into arraylist
+                                int quantityInMap2 = knapsack.mapSize();  
+                                ArrayList<String> itemNames2  =  new ArrayList<>();                                    // quantity of the items in the map
+                                ArrayList<Double> itemWeights2 = new ArrayList<>();   // convert hashmap values into arraylist
+                                ArrayList<Double> itemValues2 = new ArrayList<>();    // convert hashmap values into arraylist
                                 Memoization mz = new Memoization();
-                    
+                                
+                                for (Map.Entry<String, Map<Double, Double>> itemEntry : knapsack.items.entrySet()) {
+                                    String itemNamestring2 = itemEntry.getKey();
+                                    Map<Double, Double> itemDetails = itemEntry.getValue();
+                                    for (Map.Entry<Double, Double> entry : itemDetails.entrySet()) {
+                                        itemNames2.add(itemNamestring2);
+                                        itemWeights2.add(entry.getKey());
+                                        itemValues2.add(entry.getValue());
+                                    }
+                                }
                                 double[] weightsArray2 = new double[itemWeights2.size()];                     //convert to array
                                 double[] valuesArray2= new double[itemValues2.size()];                       //convert to array
     
@@ -137,11 +159,21 @@ public class mainApp {
                             case 3:
                                 System.out.print("Enter Knapsack capacity :");
                                 double capacitybt = scanner.nextInt();
-                                int quantityInMapbt = knapsack.mapSize();                                     // quantity of the items in the map
-                                ArrayList<Double> itemWeightsbt = new ArrayList<>(knapsack.items.keySet());   // convert hashmap values into arraylist
-                                ArrayList<Double> itemValuesbt = new ArrayList<>(knapsack.items.values());    // convert hashmap values into arraylist
+                                int quantityInMapbt = knapsack.mapSize();
+                                ArrayList<String> itemNamesbt  =  new ArrayList<>();                                     // quantity of the items in the map
+                                ArrayList<Double> itemWeightsbt = new ArrayList<>();   // convert hashmap values into arraylist
+                                ArrayList<Double> itemValuesbt = new ArrayList<>();    // convert hashmap values into arraylist
                                 BruteForceAlgorithm bt = new BruteForceAlgorithm();
-                    
+                                
+                                for (Map.Entry<String, Map<Double, Double>> itemEntry : knapsack.items.entrySet()) {
+                                    String itemNamestring3 = itemEntry.getKey();
+                                    Map<Double, Double> itemDetails = itemEntry.getValue();
+                                    for (Map.Entry<Double, Double> entry : itemDetails.entrySet()) {
+                                        itemNamesbt.add(itemNamestring3);
+                                        itemWeightsbt.add(entry.getKey());
+                                        itemValuesbt.add(entry.getValue());
+                                    }
+                                }
                                 double[] weightsArraybt = new double[itemWeightsbt.size()];                     //convert to array
                                 double[] valuesArraybt= new double[itemValuesbt.size()];                       //convert to array
     
