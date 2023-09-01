@@ -25,6 +25,7 @@ public class mainApp {
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume the newline
 
+            boolean knapsackLoop = true;
             switch (choice) {
                 case 1:
                     clearScreen();
@@ -83,12 +84,14 @@ public class mainApp {
                         System.out.println("Map is empty > Try Again !");
                         break;
                     }
-                    while(true){
+
+                    while(knapsackLoop){
                         Scanner sc = new Scanner(System.in);
                         System.out.println("Please choose the algorithm");
                         System.out.println(" 1. Recursive algorithm");
                         System.out.println(" 2. Memoization technique ");
                         System.out.println(" 3. Brute-Force algorithm ");
+                        System.out.println(" 4. Quit to main menu ");
                         System.out.println(" Selection  >>" );
                         int user_algo_ch = sc.nextInt();
                         switch(user_algo_ch){
@@ -216,13 +219,20 @@ public class mainApp {
                                 System.out.println("Execution time: " + executionTimebt+ " ms");  
                                 break;
 
+                            case 4:
+                                clearScreen();
+                                knapsackLoop = false;
+                                break;
                             default:
                                 clearScreen();
                                 System.out.println("Wrong Input : Try Again ! ");
+                            
                         }
                     }
                 default:
-                    System.out.println("Invalid choice. Please choose a valid option.");
+                    if(knapsackLoop == true){
+                        System.out.println("Invalid choice. Please choose a valid option.");
+                    }
             }
         }
     
