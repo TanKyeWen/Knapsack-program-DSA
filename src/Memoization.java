@@ -74,4 +74,26 @@ public class Memoization {
             return getSelectedWeights(W, wt, val, n - 1);
         }
     }
+
+    public String getSelectedQuantities(double W, double wt[], double val[], int n, int[] itemQuantities) {
+        double dp[][] = new double[n + 1][(int) W + 1];
+        for (int i = 0; i < n + 1; i++)
+            for (int j = 0; j < W + 1; j++)
+                dp[i][j] = -1;
+
+        memoRec((int) W, wt, val, n, dp); // Call memoRec to populate dp array
+
+        if (n == 0 || W == 0)
+            return "";
+
+        if (wt[n - 1] > W)
+            return getSelectedQuantities(W, wt, val, n - 1, itemQuantities);
+
+        if (val[n - 1] + dp[n - 1][(int) W - (int) wt[n - 1]] > dp[n - 1][(int) W]) {
+            int selectedQuantity = itemQuantities[n - 1];
+            return selectedQuantity + " " + getSelectedQuantities(W - wt[n - 1], wt, val, n - 1, itemQuantities);
+        } else {
+            return getSelectedQuantities(W, wt, val, n - 1, itemQuantities);
+        }
+    }
 }

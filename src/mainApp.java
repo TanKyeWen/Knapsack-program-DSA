@@ -38,11 +38,14 @@ public class mainApp {
                         String itemname = scanner.nextLine();
                         System.out.println("Enter Item Weight: ");
                         double itemWeight = scanner.nextDouble();
+                        System.out.println("Enter Item Quantity: ");
+                        int itemQuantity = scanner.nextInt();
                         System.out.println("Enter Item Value: ");
                         double itemValue = scanner.nextDouble();
+            
                         System.out.println("");
                         System.out.println("");
-                        knapsack.addToMap(itemname,itemWeight, itemValue);
+                        knapsack.addToMap(itemname,itemWeight, itemQuantity,itemValue);
                         scanner.nextLine();
                     }
 
@@ -53,9 +56,11 @@ public class mainApp {
                     String deleteItemName = scanner.nextLine();
                     System.out.print("Enter Item Weight you wanted to delete: ");
                     double deleteItemWeight = scanner.nextDouble();
+                    System.out.print("Enter Item Quantity you wanted to delete : ");
+                    int deleteItemQuantity = scanner.nextInt();
                     System.out.print("Enter Item Value you wanted to delete : ");
                     double deleteItemValue = scanner.nextDouble();
-                    knapsack.deleteItem(deleteItemName,deleteItemWeight, deleteItemValue);
+                    knapsack.deleteItem(deleteItemName,deleteItemWeight,deleteItemQuantity,deleteItemValue);
                     break;
                 case 3:
                     clearScreen();
@@ -63,9 +68,11 @@ public class mainApp {
                     String searchItemName = scanner.nextLine();
                     System.out.print("Enter Item Weight you wanted to search: ");
                     double searchItemWeight = scanner.nextDouble();
+                    System.out.print("Enter Item Quantity you wanted to search : ");
+                    int searchItemQuantity = scanner.nextInt();
                     System.out.print("Enter Item Value you wanted to search : ");
                     double searchItemValue = scanner.nextDouble();
-                    knapsack.searchItem(searchItemName,searchItemWeight, searchItemValue);
+                    knapsack.searchItem(searchItemName,searchItemWeight,searchItemQuantity,searchItemValue);
                     break;
                 case 4:
                     clearScreen();
@@ -98,29 +105,42 @@ public class mainApp {
                             case 1:
                                 System.out.print("Enter Knapsack capacity :");
                                 double capacity = scanner.nextInt();
-                                int quantityInMap = knapsack.mapSize();  
-                                ArrayList<String> itemNames  =  new ArrayList<>();                                // quantity of the items in the map
+                                int quantityInMap = knapsack.mapSize();              // quantity of the items in the map
+                                ArrayList<String> itemNames  =  new ArrayList<>();   // convert hashmap values into arraylist                                   
                                 ArrayList<Double> itemWeights = new ArrayList<>();   // convert hashmap values into arraylist
+                                ArrayList<Integer> itemQuantities = new ArrayList<>(); // convert hashmap values into arraylist
                                 ArrayList<Double> itemValues = new ArrayList<>();    // convert hashmap values into arraylist
                                 RecursiveAlgorithm Recursivealgorithm = new RecursiveAlgorithm();
 
-                                for (Map.Entry<String, Map<Double, Double>> itemEntry : knapsack.items.entrySet()) {
-                                    String itemNamestring = itemEntry.getKey();
-                                    Map<Double, Double> itemDetails = itemEntry.getValue();
-                                    for (Map.Entry<Double, Double> entry : itemDetails.entrySet()) {
-                                        itemNames.add(itemNamestring);
-                                        itemWeights.add(entry.getKey());
-                                        itemValues.add(entry.getValue());
+                                for (Map.Entry<String, Map<Double, Map<Integer, Double>>> itemEntry : knapsack.items.entrySet()) {
+                                    String itemNameString = itemEntry.getKey();
+                                    Map<Double, Map<Integer, Double>> itemDetails = itemEntry.getValue();
+                                
+                                    for (Map.Entry<Double, Map<Integer, Double>> weightEntry : itemDetails.entrySet()) {
+                                        double itemWeight = weightEntry.getKey();
+                                        Map<Integer, Double> quantityDetails = weightEntry.getValue();
+                                
+                                        for (Map.Entry<Integer, Double> quantityEntry : quantityDetails.entrySet()) {
+                                            int itemQuantity = quantityEntry.getKey();
+                                            double itemValue = quantityEntry.getValue();
+                                
+                                            itemNames.add(itemNameString);
+                                            itemWeights.add(itemWeight);
+                                            itemQuantities.add(itemQuantity);
+                                            itemValues.add(itemValue);
+                                        }
                                     }
                                 }
                                  
                                 String[] namesArray = new String[itemNames.size()];
                                 double[] weightsArray = new double[itemWeights.size()];                     //convert to array
+                                int[] quantityArray = new int[itemQuantities.size()];
                                 double[] valuesArray = new double[itemValues.size()];                       //convert to array
     
                                 for (int i = 0; i < itemWeights.size(); i++) {
                                     namesArray[i] = itemNames.get(i);
                                     weightsArray[i] = itemWeights.get(i);
+                                    quantityArray[i] = itemQuantities.get(i);
                                     valuesArray[i] = itemValues.get(i);
                                 }
 
@@ -132,8 +152,10 @@ public class mainApp {
                                 System.out.println("                  Recursive Algorithm                          ");
                                 System.out.println("---------------------------------------------------------------"); 
                                 System.out.println("Max value selected  chosen by Recursive algorithm : "  + result); 
-                                System.out.println("Result selected item name   :                       "  + Recursivealgorithm.getSelectedItems(capacity, weightsArray, valuesArray, quantityInMap,namesArray)); 
-                                System.out.println("Result selected item weight :                       "  + Recursivealgorithm.getSelectedWeights(capacity, weightsArray, valuesArray, quantityInMap));
+                                System.out.println("Capacity of the knapsack                          : "  + capacity); 
+                                System.out.println("Result of selected item name                      : "  + Recursivealgorithm.getSelectedItems(capacity, weightsArray, valuesArray, quantityInMap,namesArray)); 
+                                System.out.println("Result of selected item weight                    : "  + Recursivealgorithm.getSelectedWeights(capacity, weightsArray, valuesArray, quantityInMap));
+                                System.out.println("Result of selected item quantity                  : "  + Recursivealgorithm.getSelectedQuantities(capacity,weightsArray,valuesArray,quantityInMap,namesArray,quantityArray));
                                 System.out.println("Execution time: " + executionTime + " ms"); 
                                 break;
                                 
@@ -141,68 +163,98 @@ public class mainApp {
                                 System.out.print("Enter Knapsack capacity :");
                                 double capacity2 = scanner.nextInt();
                                 int quantityInMap2 = knapsack.mapSize();  
-                                ArrayList<String> itemNames2  =  new ArrayList<>();                                    // quantity of the items in the map
-                                ArrayList<Double> itemWeights2 = new ArrayList<>();   // convert hashmap values into arraylist
-                                ArrayList<Double> itemValues2 = new ArrayList<>();    // convert hashmap values into arraylist
+                                ArrayList<String> itemNamesmz  =  new ArrayList<>();   // convert hashmap values into arraylist                                   
+                                ArrayList<Double> itemWeightsmz = new ArrayList<>();   // convert hashmap values into arraylist
+                                ArrayList<Integer> itemQuantitiesmz = new ArrayList<>(); // convert hashmap values into arraylist
+                                ArrayList<Double> itemValuesmz = new ArrayList<>();    // convert hashmap values into arraylist
                                 Memoization mz = new Memoization();
+
+                                for (Map.Entry<String, Map<Double, Map<Integer, Double>>> itemEntry : knapsack.items.entrySet()) {
+                                    String itemNameStringMZ = itemEntry.getKey();
+                                    Map<Double, Map<Integer, Double>> itemDetails = itemEntry.getValue();
                                 
-                                for (Map.Entry<String, Map<Double, Double>> itemEntry : knapsack.items.entrySet()) {
-                                    String itemNamestring2 = itemEntry.getKey();
-                                    Map<Double, Double> itemDetails = itemEntry.getValue();
-                                    for (Map.Entry<Double, Double> entry : itemDetails.entrySet()) {
-                                        itemNames2.add(itemNamestring2);
-                                        itemWeights2.add(entry.getKey());
-                                        itemValues2.add(entry.getValue());
+                                    for (Map.Entry<Double, Map<Integer, Double>> weightEntry : itemDetails.entrySet()) {
+                                        double itemWeightMZ = weightEntry.getKey();
+                                        Map<Integer, Double> quantityDetails = weightEntry.getValue();
+                                
+                                        for (Map.Entry<Integer, Double> quantityEntry : quantityDetails.entrySet()) {
+                                            int itemQuantityMZ = quantityEntry.getKey();
+                                            double itemValueMZ = quantityEntry.getValue();
+                                
+                                            itemNamesmz.add(itemNameStringMZ);
+                                            itemWeightsmz.add(itemWeightMZ);
+                                            itemQuantitiesmz.add(itemQuantityMZ);
+                                            itemValuesmz.add(itemValueMZ);
+                                        }
                                     }
                                 }
-                                String[] namesArray2 = new String[itemNames2.size()];
-                                double[] weightsArray2 = new double[itemWeights2.size()];                     //convert to array
-                                double[] valuesArray2= new double[itemValues2.size()];                       //convert to array
+                                 
+                                String[] namesArraymz = new String[itemNamesmz.size()];
+                                double[] weightsArraymz = new double[itemWeightsmz.size()];                     //convert to array
+                                int[] quantityArraymz = new int[itemQuantitiesmz.size()];
+                                double[] valuesArraymz = new double[itemValuesmz.size()];                       //convert to array
     
-                                for (int i = 0; i < itemWeights2.size(); i++) {
-                                    namesArray2[i] = itemNames2.get(i);
-                                    weightsArray2[i] = itemWeights2.get(i);
-                                    valuesArray2[i] = itemValues2.get(i);
+                                for (int i = 0; i < itemWeightsmz.size(); i++) {
+                                    namesArraymz[i] = itemNamesmz.get(i);
+                                    weightsArraymz[i] = itemWeightsmz.get(i);
+                                    quantityArraymz[i] = itemQuantitiesmz.get(i);
+                                    valuesArraymz[i] = itemValuesmz.get(i);
                                 }
                                 
                                 long startTime2 = System.nanoTime();
-                                double result2 = mz.memo(capacity2, weightsArray2, valuesArray2, quantityInMap2);
+                                double result2 = mz.memo(capacity2, weightsArraymz, valuesArraymz, quantityInMap2);
                                 long endTime2 = System.nanoTime();
                                 long executionTime2 = endTime2 - startTime2;
                                 System.out.println("---------------------------------------------------------------"); 
-                                System.out.println("                  Memoization Technique                          ");
+                                System.out.println("                  Memoization Technique                        ");
                                 System.out.println("---------------------------------------------------------------"); 
-                                System.out.println("Max value selected  chosen by Memoization algorithm : "  + result2); 
-                                System.out.println("Result selected item name                           : "  + mz.getSelectedItems(capacity2, weightsArray2, valuesArray2, quantityInMap2,namesArray2)); 
-                                System.out.println("Result selected item weight                         : "  + mz.getSelectedWeights(capacity2, weightsArray2, valuesArray2, quantityInMap2)); 
-                                System.out.println("Execution time: " + executionTime2+ " ms"); 
+                                System.out.println("Max value selected  chosen by Memoization Technique : "  + result2); 
+                                System.out.println("Capacity of the knapsack                            : "  + capacity2); 
+                                System.out.println("Result of selected item name                        : "  + mz.getSelectedItems(capacity2, weightsArraymz, valuesArraymz, quantityInMap2,namesArraymz)); 
+                                System.out.println("Result of selected item weight                      : "  + mz.getSelectedWeights(capacity2, weightsArraymz, valuesArraymz, quantityInMap2));
+                                System.out.println("Result of selected item quantity                    : "  + mz.getSelectedQuantities(capacity2,weightsArraymz,valuesArraymz,quantityInMap2,quantityArraymz));
+                                System.out.println("Execution time: " + executionTime2 + " ms"); 
                                 break;
 
                             case 3:
                                 System.out.print("Enter Knapsack capacity :");
                                 double capacitybt = scanner.nextInt();
                                 int quantityInMapbt = knapsack.mapSize();
-                                ArrayList<String> itemNamesbt  =  new ArrayList<>();                                     // quantity of the items in the map
+                                ArrayList<String> itemNamesbt  =  new ArrayList<>();   // convert hashmap values into arraylist                                   
                                 ArrayList<Double> itemWeightsbt = new ArrayList<>();   // convert hashmap values into arraylist
+                                ArrayList<Integer> itemQuantitiesbt = new ArrayList<>(); // convert hashmap values into arraylist
                                 ArrayList<Double> itemValuesbt = new ArrayList<>();    // convert hashmap values into arraylist
-                                BruteForceAlgorithm bt = new BruteForceAlgorithm();
+                                BruteForceAlgorithm bt= new BruteForceAlgorithm();
+
+                                for (Map.Entry<String, Map<Double, Map<Integer, Double>>> itemEntry : knapsack.items.entrySet()) {
+                                    String itemNameStringBT = itemEntry.getKey();
+                                    Map<Double, Map<Integer, Double>> itemDetails = itemEntry.getValue();
                                 
-                                for (Map.Entry<String, Map<Double, Double>> itemEntry : knapsack.items.entrySet()) {
-                                    String itemNamestring3 = itemEntry.getKey();
-                                    Map<Double, Double> itemDetails = itemEntry.getValue();
-                                    for (Map.Entry<Double, Double> entry : itemDetails.entrySet()) {
-                                        itemNamesbt.add(itemNamestring3);
-                                        itemWeightsbt.add(entry.getKey());
-                                        itemValuesbt.add(entry.getValue());
+                                    for (Map.Entry<Double, Map<Integer, Double>> weightEntry : itemDetails.entrySet()) {
+                                        double itemWeightBT = weightEntry.getKey();
+                                        Map<Integer, Double> quantityDetails = weightEntry.getValue();
+                                
+                                        for (Map.Entry<Integer, Double> quantityEntry : quantityDetails.entrySet()) {
+                                            int itemQuantityBT = quantityEntry.getKey();
+                                            double itemValueBT = quantityEntry.getValue();
+                                
+                                            itemNamesbt.add(itemNameStringBT);
+                                            itemWeightsbt.add(itemWeightBT);
+                                            itemQuantitiesbt.add(itemQuantityBT);
+                                            itemValuesbt.add(itemValueBT);
+                                        }
                                     }
                                 }
+                                 
                                 String[] namesArraybt = new String[itemNamesbt.size()];
                                 double[] weightsArraybt = new double[itemWeightsbt.size()];                     //convert to array
-                                double[] valuesArraybt= new double[itemValuesbt.size()];                       //convert to array
+                                int[] quantityArraybt = new int[itemQuantitiesbt.size()];
+                                double[] valuesArraybt = new double[itemValuesbt.size()];                       //convert to array
     
                                 for (int i = 0; i < itemWeightsbt.size(); i++) {
                                     namesArraybt[i] = itemNamesbt.get(i);
                                     weightsArraybt[i] = itemWeightsbt.get(i);
+                                    quantityArraybt[i] = itemQuantitiesbt.get(i);
                                     valuesArraybt[i] = itemValuesbt.get(i);
                                 }
                                 
@@ -211,12 +263,14 @@ public class mainApp {
                                 long endTimebt = System.nanoTime();
                                 long executionTimebt = endTimebt - startTimebt;
                                 System.out.println("---------------------------------------------------------------"); 
-                                System.out.println("                  Brute - Force Algorithm                      ");
+                                System.out.println("                  Brute Force Algorithm                        ");
                                 System.out.println("---------------------------------------------------------------"); 
-                                System.out.println("Max value selected  chosen by Memoization algorithm : "  + resultbt); 
-                                System.out.println("Result selected item name                           : "  + bt.getSelectedItems(capacitybt, weightsArraybt, valuesArraybt, quantityInMapbt,namesArraybt)); 
-                                System.out.println("Result selected item weight                         : "  + bt.getSelectedWeights(capacitybt, weightsArraybt, valuesArraybt, quantityInMapbt)); 
-                                System.out.println("Execution time: " + executionTimebt+ " ms");  
+                                System.out.println("Max value selected  chosen by Brute Force Algorithm : "  + resultbt); 
+                                System.out.println("Capacity of the knapsack                            : "  + capacitybt); 
+                                System.out.println("Result of selected item name                        : "  + bt.getSelectedItems(capacitybt, weightsArraybt, valuesArraybt, quantityInMapbt,namesArraybt)); 
+                                System.out.println("Result of selected item weight                      : "  + bt.getSelectedWeights(capacitybt, weightsArraybt, valuesArraybt, quantityInMapbt));
+                                System.out.println("Result of selected item quantity                    : "  + bt.getSelectedQuantities(capacitybt,weightsArraybt,valuesArraybt,quantityInMapbt,quantityArraybt));
+                                System.out.println("Execution time: " + executionTimebt + " ms");  
                                 break;
 
                             case 4:

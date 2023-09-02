@@ -48,4 +48,24 @@ public class BruteForceAlgorithm {
             return getSelectedWeights(W, wt, val, n - 1);
         }
     }
+
+    // Function to return selected item quantities
+    public String getSelectedQuantities(double W, double[] wt, double[] val, int n, int[] itemQuantities) {
+        if (n == 0 || W == 0) {
+            return "";
+        }
+        if (wt[n - 1] > W) {
+            return getSelectedQuantities(W, wt, val, n - 1, itemQuantities);
+        }
+
+        double withItem = val[n - 1] + BruteForce(W - wt[n - 1], wt, val, n - 1);
+        double withoutItem = BruteForce(W, wt, val, n - 1);
+
+        if (withItem > withoutItem) {
+            int selectedQuantity = itemQuantities[n - 1];
+            return selectedQuantity + " " + getSelectedQuantities(W - wt[n - 1], wt, val, n - 1, itemQuantities);
+        } else {
+            return getSelectedQuantities(W, wt, val, n - 1, itemQuantities);
+        }
+    }
 }
