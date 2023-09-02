@@ -92,6 +92,11 @@ public class mainApp {
                         break;
                     }
 
+                    if(mapsize == 1){
+                        System.out.println("Must be 2 values for knapsack > Try Again !");
+                        break;
+                    }
+
                     while(knapsackLoop){
                         Scanner sc = new Scanner(System.in);
                         System.out.println("Please choose the algorithm");
@@ -103,8 +108,21 @@ public class mainApp {
                         int user_algo_ch = sc.nextInt();
                         switch(user_algo_ch){
                             case 1:
-                                System.out.print("Enter Knapsack capacity :");
-                                double capacity = scanner.nextInt();
+                                
+                            double capacity;
+                    while (true) {
+                        System.out.print("Enter Knapsack capacity : ");
+                        if (sc.hasNextDouble()) {// po
+                            capacity = sc.nextDouble();
+                            sc.nextLine(); // Consume the newline character
+                            break; // Valid input with only one value
+                        } else {
+                            sc.next(); // Consume the invalid input
+                            System.out.println("TypeInputMismatch: Please enter a valid number.");
+                        }
+                    }
+                                
+                                
                                 int quantityInMap = knapsack.mapSize();              // quantity of the items in the map
                                 ArrayList<String> itemNames  =  new ArrayList<>();   // convert hashmap values into arraylist                                   
                                 ArrayList<Double> itemWeights = new ArrayList<>();   // convert hashmap values into arraylist
