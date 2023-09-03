@@ -12,46 +12,28 @@ abstract class Abstraction {
         if (!items.containsKey(itemName)) {
             return "Item not found";
         }
-
+    
         Map<Double, Map<Integer, Double>> itemDetails = items.get(itemName);
         if (!itemDetails.containsKey(itemWeight)) {
             return "Item not found";
         }
-
+    
         Map<Integer, Double> quantityDetails = itemDetails.get(itemWeight);
         if (!quantityDetails.containsKey(itemQuantity) || quantityDetails.get(itemQuantity) != itemValue) {
             return "Item not found";
         }
-
+    
         quantityDetails.remove(itemQuantity);
         if (quantityDetails.isEmpty()) {
             itemDetails.remove(itemWeight);
         }
-
+    
         if (itemDetails.isEmpty()) {
             items.remove(itemName);
         }
-
-        return "Item deleted successfully";
+    
+        return "Item found"; // Move this line here
     }
-
-    public String searchItem(String itemName, double itemWeight, int itemQuantity, double itemValue) {
-        System.out.println("Searching for: " + itemName + ", " + itemWeight + ", " + itemQuantity + ", " + itemValue);
-    
-        if (items.containsKey(itemName)) {
-            Map<Double, Map<Integer, Double>> itemDetails = items.get(itemName);
-            if (itemDetails.containsKey(itemWeight)) {
-                Map<Integer, Double> quantityDetails = itemDetails.get(itemWeight);
-                if (quantityDetails.containsKey(itemQuantity) && quantityDetails.get(itemQuantity) == itemValue) {
-                    return "Item found !";
-                }
-            }
-        }
-    
-        System.out.println("Item not found");
-        return "Item not found";
-    }
-    
     
 
     public void addToMap(String itemName, double itemWeight, int itemQuantity, double itemValue) {
