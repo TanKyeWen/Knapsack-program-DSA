@@ -36,17 +36,23 @@ abstract class Abstraction {
     }
 
     public String searchItem(String itemName, double itemWeight, int itemQuantity, double itemValue) {
+        System.out.println("Searching for: " + itemName + ", " + itemWeight + ", " + itemQuantity + ", " + itemValue);
+    
         if (items.containsKey(itemName)) {
             Map<Double, Map<Integer, Double>> itemDetails = items.get(itemName);
             if (itemDetails.containsKey(itemWeight)) {
                 Map<Integer, Double> quantityDetails = itemDetails.get(itemWeight);
                 if (quantityDetails.containsKey(itemQuantity) && quantityDetails.get(itemQuantity) == itemValue) {
-                    return "Item found";
+                    return "Item found !";
                 }
             }
         }
+    
+        System.out.println("Item not found");
         return "Item not found";
     }
+    
+    
 
     public void addToMap(String itemName, double itemWeight, int itemQuantity, double itemValue) {
         if (itemWeight <= 0 || itemQuantity <= 0 || itemValue < 0) {

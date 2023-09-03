@@ -29,19 +29,62 @@ public class mainApp {
             switch (choice) {
                 case 1:
                     clearScreen();
-                    System.out.print("Please enter how many items you would like to add :");
-                    int num_items = scanner.nextInt();
+                    int num_items;
+                    do {
+                        System.out.print("Please enter how many items you would like to add: ");
+                        if (scanner.hasNextInt()) {
+                            num_items = scanner.nextInt();
+                            if (num_items > 0) {
+                                break; // Exit the loop if a valid positive integer is entered
+                            } else {
+                                 System.out.println("Wrong input. Please enter a positive integer for the number of items.");
+                            }
+                        } else {
+                            System.out.println("Wrong input. Please enter a valid integer for the number of items.");
+                            scanner.next(); // Consume the invalid input
+                        }
+                    } while (true);
                     scanner.nextLine();
 
-                    for(int i=0; i<num_items; i++){
+                    for (int i = 0; i < num_items; i++) {
                         System.out.println("Enter Item Name: ");
                         String itemname = scanner.nextLine();
-                        System.out.println("Enter Item Weight: ");
-                        double itemWeight = scanner.nextDouble();
-                        System.out.println("Enter Item Quantity: ");
-                        int itemQuantity = scanner.nextInt();
-                        System.out.println("Enter Item Value: ");
-                        double itemValue = scanner.nextDouble();
+            
+                        double itemWeight;
+                        do {
+                            System.out.println("Enter Item Weight: ");
+                            if (scanner.hasNextDouble()) {
+                                itemWeight = scanner.nextDouble();
+                                break; // Exit the loop if a valid double is entered
+                            } else {
+                                System.out.println("Wrong input. Please enter a valid number for Item Weight.");
+                                scanner.next();
+                            }
+                        } while (true);
+            
+                        int itemQuantity;
+                        do {
+                            System.out.println("Enter Item Quantity: ");
+                            if (scanner.hasNextInt()) {
+                                itemQuantity = scanner.nextInt();
+                                break; // Exit the loop if a valid integer is entered
+                            } else {
+                                System.out.println("Wrong input. Please enter a valid integer for Item Quantity.");
+                                scanner.next(); 
+                            }
+                        } while (true);
+            
+                        double itemValue;
+                        do {
+                            System.out.println("Enter Item Value: ");
+                            if (scanner.hasNextDouble()) {
+                                itemValue = scanner.nextDouble();
+                                break; // Exit the loop if a valid double is entered
+                            } else {
+                                System.out.println("Wrong input. Please enter a valid number for Item Value.");
+                                scanner.next(); 
+                            }
+                        } while (true);
             
                         System.out.println("");
                         System.out.println("");
@@ -52,26 +95,88 @@ public class mainApp {
                     break;
                 case 2:
                     clearScreen();
-                    System.out.print("Enter Item Name you wanted to delete: ");
+                    System.out.print("Enter Item Name you want to delete: ");
                     String deleteItemName = scanner.nextLine();
-                    System.out.print("Enter Item Weight you wanted to delete: ");
-                    double deleteItemWeight = scanner.nextDouble();
-                    System.out.print("Enter Item Quantity you wanted to delete : ");
-                    int deleteItemQuantity = scanner.nextInt();
-                    System.out.print("Enter Item Value you wanted to delete : ");
-                    double deleteItemValue = scanner.nextDouble();
-                    knapsack.deleteItem(deleteItemName,deleteItemWeight,deleteItemQuantity,deleteItemValue);
+        
+                    double deleteItemWeight;
+                    do {
+                        System.out.print("Enter Item Weight you want to delete: ");
+                        if (scanner.hasNextDouble()) {
+                            deleteItemWeight = scanner.nextDouble();
+                            break; // Exit the loop if a valid double is entered
+                        } else {
+                            System.out.println("Wrong input. Please enter a valid number for Item Weight.");
+                            scanner.next();
+                        }
+                    } while (true);
+        
+                    int deleteItemQuantity;
+                    do {
+                        System.out.print("Enter Item Quantity you want to delete: ");
+                        if (scanner.hasNextInt()) {
+                            deleteItemQuantity = scanner.nextInt();
+                            break; // Exit the loop if a valid integer is entered
+                        } else {
+                            System.out.println("Wrong input. Please enter a valid integer for Item Quantity.");
+                            scanner.next();
+                        }
+                    } while (true);
+        
+                    double deleteItemValue;
+                    do {
+                        System.out.print("Enter Item Value you want to delete: ");
+                        if (scanner.hasNextDouble()) {
+                            deleteItemValue = scanner.nextDouble();
+                            break; // Exit the loop if a valid double is entered
+                        } else {
+                            System.out.println("Wrong input. Please enter a valid number for Item Value.");
+                            scanner.next();
+                        }
+                    } while (true);
+        
+                    knapsack.deleteItem(deleteItemName, deleteItemWeight, deleteItemQuantity, deleteItemValue);
+        
                     break;
                 case 3:
                     clearScreen();
-                    System.out.print("Enter Item Name you wanted to search: ");
+                    System.out.print("Enter Item Name you want to search: ");
                     String searchItemName = scanner.nextLine();
-                    System.out.print("Enter Item Weight you wanted to search: ");
-                    double searchItemWeight = scanner.nextDouble();
-                    System.out.print("Enter Item Quantity you wanted to search : ");
-                    int searchItemQuantity = scanner.nextInt();
-                    System.out.print("Enter Item Value you wanted to search : ");
-                    double searchItemValue = scanner.nextDouble();
+        
+                    double searchItemWeight;
+                    do {
+                        System.out.print("Enter Item Weight you want to search: ");
+                        if (scanner.hasNextDouble()) {
+                            searchItemWeight = scanner.nextDouble();
+                            break; // Exit the loop if a valid double is entered
+                        } else {
+                            System.out.println("Wrong input. Please enter a valid number for Item Weight.");
+                            scanner.next();
+                        }
+                    } while (true);
+        
+                    int searchItemQuantity;
+                    do {
+                        System.out.print("Enter Item Quantity you want to search: ");
+                        if (scanner.hasNextInt()) {
+                            searchItemQuantity = scanner.nextInt();
+                            break; // Exit the loop if a valid integer is entered
+                        } else {
+                            System.out.println("Wrong input. Please enter a valid integer for Item Quantity.");
+                            scanner.next();
+                        }
+                    } while (true);
+        
+                    double searchItemValue;
+                    do {
+                        System.out.print("Enter Item Value you want to search: ");
+                        if (scanner.hasNextDouble()) {
+                            searchItemValue = scanner.nextDouble();
+                            break; // Exit the loop if a valid double is entered
+                        } else {
+                            System.out.println("Wrong input. Please enter a valid number for Item Value.");
+                            scanner.next();
+                        }
+                    } while (true);
                     knapsack.searchItem(searchItemName,searchItemWeight,searchItemQuantity,searchItemValue);
                     break;
                 case 4:
@@ -108,11 +213,19 @@ public class mainApp {
                         int user_algo_ch = sc.nextInt();
                         switch(user_algo_ch){
                             case 1:
-                                
+                            
                                 double capacity;
-                                System.out.print("Enter Knapsack capacity : ");
-                                capacity = sc.nextDouble();
-                      
+                                do {
+                                    System.out.print("Enter the capacity : ");
+                                    if (scanner.hasNextDouble()) {
+                                        capacity = scanner.nextDouble();
+                                        break; // Exit the loop if a valid double is entered
+                                    } else {
+                                        System.out.println("Wrong input. Please enter a valid number for capacity.");
+                                        scanner.next();
+                                    }
+                                } while (true);
+                
                                 int quantityInMap = knapsack.mapSize();              // quantity of the items in the map
                                 ArrayList<String> itemNames  =  new ArrayList<>();   // convert hashmap values into arraylist                                   
                                 ArrayList<Double> itemWeights = new ArrayList<>();   // convert hashmap values into arraylist
@@ -139,6 +252,7 @@ public class mainApp {
                                         }
                                     }
                                 }
+                                
                                  
                                 String[] namesArray = new String[itemNames.size()];
                                 double[] weightsArray = new double[itemWeights.size()];                     //convert to array
@@ -168,8 +282,18 @@ public class mainApp {
                                 break;
                                 
                             case 2:
-                                System.out.print("Enter Knapsack capacity :");
-                                double capacity2 = scanner.nextInt();
+                                double capacity2;
+                                do {
+                                    System.out.print("Enter the capacity : ");
+                                    if (scanner.hasNextDouble()) {
+                                        capacity2 = scanner.nextDouble();
+                                        break; // Exit the loop if a valid double is entered
+                                    } else {
+                                        System.out.println("Wrong input. Please enter a valid number for capacity.");
+                                        scanner.next();
+                                    }
+                                } while (true);
+
                                 int quantityInMap2 = knapsack.mapSize();  
                                 ArrayList<String> itemNamesmz  =  new ArrayList<>();   // convert hashmap values into arraylist                                   
                                 ArrayList<Double> itemWeightsmz = new ArrayList<>();   // convert hashmap values into arraylist
@@ -225,8 +349,17 @@ public class mainApp {
                                 break;
 
                             case 3:
-                                System.out.print("Enter Knapsack capacity :");
-                                double capacitybt = scanner.nextInt();
+                                double capacitybt;
+                                do {
+                                    System.out.print("Enter the capacity : ");
+                                    if (scanner.hasNextDouble()) {
+                                        capacitybt = scanner.nextDouble();
+                                        break; // Exit the loop if a valid double is entered
+                                    } else {
+                                        System.out.println("Wrong input. Please enter a valid number for capacity.");
+                                        scanner.next();
+                                    }
+                                } while (true);
                                 int quantityInMapbt = knapsack.mapSize();
                                 ArrayList<String> itemNamesbt  =  new ArrayList<>();   // convert hashmap values into arraylist                                   
                                 ArrayList<Double> itemWeightsbt = new ArrayList<>();   // convert hashmap values into arraylist
