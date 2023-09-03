@@ -109,20 +109,10 @@ public class mainApp {
                         switch(user_algo_ch){
                             case 1:
                                 
-                            double capacity;
-                    while (true) {
-                        System.out.print("Enter Knapsack capacity : ");
-                        if (sc.hasNextDouble()) {// po
-                            capacity = sc.nextDouble();
-                            sc.nextLine(); // Consume the newline character
-                            break; // Valid input with only one value
-                        } else {
-                            sc.next(); // Consume the invalid input
-                            System.out.println("TypeInputMismatch: Please enter a valid number.");
-                        }
-                    }
-                                
-                                
+                                double capacity;
+                                System.out.print("Enter Knapsack capacity : ");
+                                capacity = sc.nextDouble();
+                      
                                 int quantityInMap = knapsack.mapSize();              // quantity of the items in the map
                                 ArrayList<String> itemNames  =  new ArrayList<>();   // convert hashmap values into arraylist                                   
                                 ArrayList<Double> itemWeights = new ArrayList<>();   // convert hashmap values into arraylist
