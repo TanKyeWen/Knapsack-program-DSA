@@ -21,8 +21,15 @@ public class mainApp {
             System.out.println("4. Exit");
             System.out.println("5. Enter knapsack program and choose which algorithm to use:");
             System.out.println("Please enter your choice >>");
-            int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume the newline
+            int choice;
+            try {
+                choice = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid choice. Please enter a valid option.");
+                scanner.nextLine(); // Consume the invalid input
+                continue;
+            }
 
             boolean knapsackLoop = true;
             switch (choice) {
