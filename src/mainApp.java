@@ -175,7 +175,16 @@ public class mainApp {
                         System.out.println(" 3. Brute-Force algorithm ");
                         System.out.println(" 4. Quit to main menu ");
                         System.out.println(" Selection  >>" );
-                        int user_algo_ch = sc.nextInt();
+                        int user_algo_ch ;
+                            try {
+                                user_algo_ch = scanner.nextInt();
+                                scanner.nextLine(); // Consume the newline
+                            } catch (InputMismatchException e) {
+                                System.out.println("Invalid choice. Please enter a valid option.");
+                                scanner.nextLine(); // Consume the invalid input
+                                continue;
+                            }
+                            
                         switch(user_algo_ch){
                             case 1:
                             
@@ -188,6 +197,7 @@ public class mainApp {
                                     } else {
                                         System.out.println("Wrong input. Please enter a valid number for capacity.");
                                         scanner.next();
+                                        
                                     }
                                 } while (true);
                 
