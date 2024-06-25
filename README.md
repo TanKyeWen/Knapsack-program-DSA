@@ -2,14 +2,14 @@
 This program aims to measure the time executed using various algorithms 
 
 # The algorithms :
-* Abstraction
-* Brute Force Algorithm
-* Memoization Techniques ( Fastest )
-* Recursive
+- Abstraction
+- Brute Force Algorithm
+- Memoization Techniques ( Fastest )
+- Recursive
 
 # Data Structure Used 
-* Map
-* HashMap
+- Map
+- HashMap
   
 # Note
 1. mainApp.java is the main CLI application
@@ -23,15 +23,15 @@ This program aims to measure the time executed using various algorithms
 このプログラムは色んなAlgorithmで実行した時間を測りことになっています。
 
 # 利用した Algorithms :
-* Abstraction
-* Brute Force Algorithm
-* Memoization Techniques ( Fastest )
-* Recursive
+- Abstraction
+- Brute Force Algorithm
+- Memoization Techniques ( Fastest )
+- Recursive
 
 # 利用した　Data Structure 
-* Map
-* HashMap
-
+- Map
+- HashMap
+  
 # 知り合い
 1. mainApp.javaは大分のプログラムです。CLIで利用できます。
 2. Interfaceは全部のコードのInterfaceだけです。
