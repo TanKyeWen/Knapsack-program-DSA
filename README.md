@@ -20,6 +20,7 @@ This program aims to measure the time executed using various algorithms
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## 日本バージョン
 ## Knapsack Program DSA Java 
+このプログラムは色んなAlgorithmで実行した時間測りことになっています。
 
 # 利用した Algorithms :
 * Abstraction
