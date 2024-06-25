@@ -18,9 +18,9 @@ This program aims to measure the time executed using various algorithms
 ## Special thanks to **Lee Zhan Jun**, **Tan Kye Wen** , **Chua Yun Sheng** for contributing this project 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-## 日本バージョン
+## 日本語バージョン
 ## Knapsack Program DSA Java 
-このプログラムは色んなAlgorithmで実行した時間測りことになっています。
+このプログラムは色んなAlgorithmで実行した時間を測りことになっています。
 
 # 利用した Algorithms :
 * Abstraction
