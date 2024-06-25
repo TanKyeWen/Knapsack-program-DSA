@@ -1,18 +1,18 @@
-## Getting Started
+# Knapsack Program DSA JAVA
+This program aims to measure the time executed using various algorithms 
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+# The algorithms :
+* Abstraction
+* Brute Force Algorithm
+* Memoization Techniques ( Fastest )
+* Recursive
 
-## Folder Structure
-
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+# Data Structure Used 
+* Map
+* Hashmap
+  
+# Note
+1. mainApp.java is the main CLI application
+2. interface is just the interface for all the codes
+   
+## Special thanks to **Lee Zhan Jun**, **Tan Kye Wen** , **Chua Yun Sheng** for contributing this project 
